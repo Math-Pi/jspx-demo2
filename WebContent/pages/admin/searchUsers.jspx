@@ -1,0 +1,117 @@
+<page master="/master/site.master" encode="windows-1256" controller="org.bay.jspx.demo2.web.controller.admin.SearchUser"
+  >
+	<contentHolder id="navholder">
+		<a href="/pages/amin/index.jspx" >
+	 ${bundle.nav_admin}
+		</a>
+		:
+		<a href="/pages/admin/searchUsers.jspx" >
+	 ${bundle.form_search_users }
+		</a>
+	</contentHolder>
+	<contentHolder id="mainholder">
+	
+	<form  method="post"  onsubmit="sw('search')" style="width: 80%">
+		<center>
+				<table  cellpadding="5px" cellspacing="5px" id="formTable">
+				<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_username}
+						</td>
+						<td align="right">
+							<span >
+            					<input type="text" maxLength="150" id="userName"/>
+       						</span>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+						${bundle.user_status }
+						</td>
+						<td align="right">
+							<select id="del" >
+								<option ></option>
+								<option value="0" >${bundle.f_activ }</option>
+								<option value="1" >${bundle.f_del }</option>
+							</select>
+						</td>
+						<td align="right" class="jspx-demoLabel">
+						</td>
+						<td align="right" dir="${bundle.dir}">
+						</td>
+					</tr>
+				<tr>
+                  <td align="right" class="jspx-demoLabel">
+                    ${bundle.form_usertype}
+                  </td>
+                  <td align="right">
+                    <select id="groupId"  value="${user.groupsString}" >
+                    	<option></option>
+                      <datalookup  datasource="${sql.data_source}" sql="${sql.get_group}" key="${sql.id_key}" value="${sql.name_key}" />
+                    </select>
+                  </td>
+				</tr>
+				<tr>
+					<td height="10" align="center" colspan="4">
+						<br />
+						<linkCommand onserverclick="showResults" id="search">
+							<img src="/images/action/searchUsers${bundle.lang}.png" border="0"/>
+						</linkCommand>
+						<span id="loadingImg" style="display:none;">
+						     	${bundle.wait}
+					    	<br />
+					    	<img alt="" src="/images/loading.gif" />
+					   	</span>
+						<br />
+					</td>
+				</tr>
+
+				<tr>
+					<td colspan="4">
+					
+			
+			<datatable casesensitive="true" width="100%"  id="usersList" datasource="${sql.data_source}"
+							table="" sql="${sql.searchUsers}"
+							bindtoclass="org.bay.jspx.demo2.engine.model.Customer"
+							class="jspxTable" headerclass="jspxTableHeader" new="false"
+							rowclass="jspxTableEvenRow" selectedrowclass="jspxTableSelectedRow"
+							tdclass="jspxTd" dateformat="dd/MM/yyyy HH:mm" showrowindex="false"
+							startrowindex="1" tdclass="jspxTd" noresults="${bundle.noCustomers}"
+							noresultsclass="ie" rendered="false" var="user" >
+
+							<dataparam name="userName" control="userName"
+								expression="U.USER_NAME LIKE '%userName%'"></dataparam>
+								
+								
+							<dataparam name="userDel" control="del"
+								expression="U.DELETED=userDel"></dataparam>
+								
+							<dataparam name="groupId" control="groupId" expression="G.ID=groupId"></dataparam>
+
+							<datacolumn text="${bundle.s_user_id }" fieldname="ID"	type="number" sortable="true"/>
+							<datacolumn text="${bundle.form_username}" fieldname="USER_NAME"	type="string" sortable="true" >
+								<itemtemplate>
+									<a href="/pages/admin/viewUser.jspx?id=${user.id}" style="text-decoration: underline;">${user.user_name}</a>
+								</itemtemplate>
+							</datacolumn>
+							<datacolumn text="${bundle.form_usertype}" fieldname="G_NAME"	type="string" sortable="true"/>
+							<datacolumn text="${bundle.user_add_date }" fieldname="creation_date"	type="date" sortable="true" dateformat="dd/MM/yyyy"/>
+
+							<datacolumn text=" ${bundle.f_del }" fieldname="BDB_NAME"	type="string" sortable="true" />
+							<datacolumn text="${bundle.user_del_date }" fieldname="del_date"	type="date" sortable="true" dateformat="dd/MM/yyyy"/>
+
+
+							<exporttoexcel  filename="All Users.xls" rowstoexport="all" command="${bundle.form_excel}"/>
+							<footer class="jspxTableFooter" message="${bundle.footer}" firstcommandtext="${bundle.first}"
+								lastcommandtext="${bundle.last}" prevcommandtext="${bundle.prev}"
+								nextcommandtext="${bundle.next}" />
+						</datatable>
+					
+			</td>
+			</tr>
+			</table>
+			
+		</center>
+	</form>
+	</contentHolder>
+</page>

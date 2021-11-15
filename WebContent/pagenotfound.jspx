@@ -1,0 +1,8 @@
+<page master="/master/site.master" encode="windows-1256" >
+	<contentHolder id="navholder">енЭЩ лэб еЭэЭЩ</contentHolder>
+	<contentHolder id="mainholder">
+		<center>
+			<div class="error">ЧсенЭЩ ЧсуисцШЩ лэб уцЬцЯЩ</div>
+		</center>
+	</contentHolder>
+</page>

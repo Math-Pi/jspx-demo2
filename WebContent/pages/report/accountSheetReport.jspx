@@ -1,0 +1,145 @@
+<page master="/master/report.master" encode="windows-1256"
+controller="org.bay.jspx.demo2.web.controller.report.ReportController">
+
+  <contentHolder id="mainholder">
+    <table width="1024px" id="rTable">
+      <tr>
+	      <td align="center" colspan="5">
+	        <br />
+	        <h1>
+	           ﬂ‘› Õ”«» „”«Â„
+	        </h1>
+	        <br />
+	        <hr />
+	      </td>
+      </tr>
+      <tr>
+        <td align="right" colspan="2" nowrap="nowrap">
+          <label class="jspx-demoRLabel">
+            «·› —…
+          </label>
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          <b>${bundle.f_from}</b>
+          &nbsp;
+          &nbsp;
+          ${this.dateFrom }
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          <b>${bundle.f_to}</b>
+          &nbsp;
+          &nbsp;
+          ${this.dateTo }
+        </td>
+        <td align="right" colspan="2" nowrap="nowrap">
+          <label class="jspx-demoRLabel">
+            ${bundle.form_ref}
+          </label>
+          &nbsp;
+          &nbsp;
+          ${this.ref }
+        </td>
+      </tr>
+      <tr>
+        <td align="right" nowrap="nowrap" >
+          <label class="jspx-demoRLabel">
+            ${bundle.form_cust_name}
+          </label>
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          ${cust.name}
+        </td>
+        <td align="right" dir="${bundle.dir}" colspan="2" nowrap="nowrap">
+          <label class="jspx-demoRLabel">
+            —ﬁ„ «·Õ”«»
+          </label>
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          <label id="accountNum1" style=" font-weight: bold;  " >
+            ${cust.accountNum3 }
+          </label>
+          -
+          <label  style=" font-weight: bold;  " >
+            ${cust.accountNum2 }
+          </label>
+          -
+          <label  style=" font-weight: bold;  " >
+            ${cust.accountNum1 }
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td align="right" nowrap="nowrap">
+          <label class="jspx-demoRLabel">
+            ${bundle.form_stock_count}
+          </label>
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          ${cust.stockShare}
+        </td>
+      </tr>
+      <tr>
+      	<td>
+      		<br />
+      		<br />
+      	</td>
+      </tr>
+      <tr>
+        <td colspan="4">
+          <datatable casesensitive="true"  id="reportTable" datasource="${sql.data_source}" pagesize="99999"
+          table="" sql=""
+          bindtoclass="org.bay.jspx.demo2.engine.model.Customer"
+          class="jspxReportTable" headerclass="jspxReportTableHeader" new="false"
+          rowclass="jspxReportTableEvenRow" selectedrowclass="jspxReportTableSelectedRow"
+          tdclass="jspxReportTd" dateformat="dd/MM/yyyy HH:mm" showrowindex="false"
+          startrowindex="1" tdclass="jspxReportTd" noresults="${bundle.noCustomerAccountSheet}"
+          noresultsclass="ie" rendered="true" var="bill" autobind="true">
+
+
+            <datacolumn text="«·„»·€" fieldname="AMOUNT_DEPIT" type="NUMBER"  sortable="true" />
+            <datacolumn text="${bundle.f_ref}" fieldname="COMMENT"	type="string" sortable="true" />
+            <datacolumn text="${bundle.form_ref}" fieldname="R_NAME"	type="string" sortable="true" />
+            <datacolumn text="${bundle.bill_id}" fieldname="NAME"	type="string" sortable="true" >
+              <itemtemplate>
+                <a href="/pages/accounts/viewBill.jspx?id=${bill.id}" style="text-decoration: underline;" >${bill.serial_num}</a>
+              </itemtemplate>
+            </datacolumn>
+            <datacolumn text="${bundle.form_bill_date}" fieldname="issue_date"	type="date" sortable="true" dateformat="dd/MM/yyyy"/>
+
+
+
+            <footer class="jspxReportTableFooter" message="${bundle.footer}" firstcommandtext="${bundle.first}"
+              lastcommandtext="${bundle.last}" prevcommandtext="${bundle.prev}"
+              nextcommandtext="${bundle.next}" rendered="false"/>
+
+          </datatable>
+        </td>
+      </tr>
+    </table>
+    <table width="1024px">
+      <tr>
+        <td   align="right" nowrap="nowrap">
+          <label class="jspx-demoRLabel" >${bundle.form_trade_vol}</label>
+          &nbsp;
+          &nbsp;
+          <span style="font-size: 20pt;">
+          ${this.totalAmount }
+          </span>
+        </td>
+        <td   align="left"  nowrap="nowrap">
+          <label class="jspx-demoRLabel" >${bundle.form_trade_ratio}</label>
+          &nbsp;
+          &nbsp;
+          <span style="font-size: 20pt;">
+          ${request.attributes.RATIO }
+          </span>
+        </td>
+      </tr>
+    </table>
+  </contentHolder>
+</page>

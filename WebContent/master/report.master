@@ -1,0 +1,37 @@
+<%@page contentType="text/html; charset=windows-1256" %>
+  <page controller="org.bay.jspx.demo2.web.controller.Master" encode="windows-1256">
+    <html>
+      <head>
+        <title>
+			&nbsp;
+        </title>
+        <meta http-equiv="Cache-Control"	content="max-age=7200, must-revalidate" />
+        <meta http-equiv="Content-Type"	content="text/html; charset=windows-1256" />
+        <meta http-equiv="Content-Language" content="ar-eg" />
+        <script language="text/javascript" src="/master/jspx-demo.js"></script>
+        <link rel="stylesheet" type="text/css"	href="/master/style.css" />
+        <link rel="SHORTCUT ICON"	href="/login/favicon.ico" />
+      </head>
+      <body dir="${bundle.dir}" topmargin="0" style="background-image: none; background-color: white;" onload="window.print()">
+        <resourceBundle id="bundle" base="/res.messages" charset="cp1256"/>
+        <resourceBundle id="sql" base="/res.sql" charset="cp1256"/>
+        <center>
+        	<img src="/login/logo.png" />
+        	<br />
+        	<table>
+        		<tr>
+        			<td style="width: 40px">
+        				&nbsp;
+        			</td>
+        			<td>
+						<placeHolder id="mainholder" />
+        			</td>
+        			<td style="width: 40px">
+        				&nbsp;
+        			</td>
+        		</tr>
+        	</table>
+        </center>
+      </body>
+    </html>
+  </page>

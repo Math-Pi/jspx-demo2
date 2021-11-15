@@ -1,0 +1,29 @@
+<page master="/master/site.master" encode="windows-1256"  deniedRoles="Data Entry">
+	<contentHolder id="navholder">
+	<a href="/pages/accounts/index.jspx" >
+	 ${bundle.nav_account }
+		</a>
+	</contentHolder>
+	<contentHolder id="mainholder">
+		<center>
+			<table width="100%">
+				<tr>
+					<td align="center" width="50%">
+						<a href="/pages/accounts/searchBill.jspx">
+							<img alt="" src="/images/prev/searchBill.png"/>
+							<br/>
+							${bundle.a_cust_bill_rep}
+						</a>
+					</td>
+					<td align="center" width="50%">
+						<a href="/pages/accounts/addBill.jspx" >
+							<img alt="" src="/images/prev/addBill.png"/>
+							<br/>
+							${bundle.a_add_bill}
+						</a>
+					</td>
+				</tr>
+			</table>
+		</center>
+	</contentHolder>
+</page>

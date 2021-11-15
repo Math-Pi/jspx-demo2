@@ -1,0 +1,255 @@
+<%@page contentType="text/html; charset=windows-1256" %>
+  <page controller="org.bay.jspx.demo2.web.controller.Master" encode="windows-1256">
+    <html>
+      <head>
+        <title>
+         jspx 1.1.0  demo web app ver. 2
+        </title>
+        <meta http-equiv="Cache-Control"	content="max-age=7200, must-revalidate" />
+        <meta http-equiv="Content-Type"	content="text/html; charset=windows-1256" />
+        <meta http-equiv="Content-Language" content="ar-eg" />
+        <script language="text/javascript" src="/master/jspx-demo.js"></script>
+        <link rel="stylesheet" type="text/css"	href="/master/style.css" />
+        <link rel="SHORTCUT ICON"	href="/login/favicon.ico" />
+      </head>
+      <body dir="rtl" topmargin="0" bottommargin="0">
+        <resourceBundle id="bundle" base="/res.messages" charset="cp1256"/>
+        <resourceBundle id="sql" base="/res.sql" charset="cp1256"/>
+        <center>
+          <table cellSpacing="0" cellPadding="0" width="1024" border="0" align="center" height="100%">
+            <tr>
+              <td valign="top" class="mainheaderFont" colspan="3">
+                <table width="100%" cellpadding="0" cellspacing="0" >
+                  <tr>
+                    <td class="mainheaderSideR" dir="${bundle.dir }">
+                      <a href="/welcome.jspx" >${bundle.nav_main }</a>:
+                      <placeHolder id="navholder" style="color: balck"/>
+                    </td>
+                    <td align="right" class="mainheader">
+                    </td>
+                    <td class="mainheaderSideL" align="left">
+                    	<table>
+                    		<tr>
+                    			<td>
+				                    <label>
+				                      ${bundle.nav_welcome } ${this.userName}
+				                    </label>
+                    			</td>
+                    			<td>
+				                      <label style="color:blue" >
+				                        |
+				                      </label>
+                    			</td>
+                    			<td>
+				                      <linkcommand onserverclick="changeLanguage">
+				                      	${this.lang }
+				                      </linkcommand>
+                    			</td>
+                    		</tr>
+                    	</table>
+                    </td>
+                  </tr>
+                  <tr  height="100%">
+                    <td colspan="3" >
+                      <br/>
+                      <table style="width: 1024" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td height="100%" width="888px" align="left">
+                            <table style=" height: 100%;right: 7px;position: relative;" width="100%; " 
+                            cellpadding="0" cellspacing="0"
+                            >
+				           <tr>
+				              <td colspan="3"  align="center">
+				              	<script type="text/javascript">
+								google_ad_client = "pub-3210643720408501";
+								/* 728x15, created 10/9/09 */
+								google_ad_slot = "9626120721";
+								google_ad_width = 728;
+								google_ad_height = 15;
+								</script>
+								<script type="text/javascript"
+								src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+								</script>
+				              </td>
+				            </tr>
+                              <tr>
+                                <td class="contT" colspan="3">
+                                  &nbsp;
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="contR">
+                                  &nbsp;
+                                </td>
+                                <td class="cont" valign="top" style="padding-right: 10px;" dir="${bundle.dir }">
+                                  <placeHolder id="mainholder" />
+                                </td>
+                                <td class="contL">
+                                  &nbsp;
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="contB" colspan="3">
+                                  &nbsp;
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                          <td style="width: 136px;"  valign="top" align="right">
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <a href="/welcome.jspx" style="display: block">
+                              <div>
+                                <table id="mainNav" cellpadding="0" cellspacing="0" >
+                                  <tr>
+                                    <td align="left" width="48px;">
+                                      <a href="/welcome.jspx" style="display: block">
+                                        <img alt="" src="/images/nav/home.png" />
+                                      </a>
+                                    </td>
+                                    <td valign="middle" align="right">
+                                      <a href="/welcome.jspx" style="font-weight: bold;display: block; text-decoration: none;">
+                                        ${bundle.nav_main }
+                                      </a>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </div>
+                            </a>
+                            <br />
+                            <a href="/pages/customers/index.jspx" style="display: block">
+                              <div>
+                                <table id="customerNav" cellpadding="0" cellspacing="0" >
+                                  <tr>
+                                    <td align="left" width="48px;">
+                                      <a href="/pages/customers/index.jspx" style="display: block">
+                                        <img alt="" src="/images/nav/user.png" />
+                                      </a>
+                                    </td>
+                                    <td valign="middle" align="right">
+                                      <a href="/pages/customers/index.jspx" style="font-weight: bold;display: block; text-decoration: none;">
+										${bundle.nav_cust }
+                                      </a>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </div>
+                            </a>
+                            <br />
+                            <a href="/pages/accounts/index.jspx" style="display: block" deniedRoles="Data Entry">
+                              <div>
+                                <table id="accountNav" cellpadding="0" cellspacing="0" >
+                                  <tr>
+                                    <td align="left" width="48px;">
+                                      <a href="/pages/accounts/index.jspx" style="display: block">
+                                        <img alt="" src="/images/nav/account.png" />
+                                      </a>
+                                    </td>
+                                    <td valign="middle" align="right">
+                                      <a href="/pages/accounts/index.jspx" style="font-weight: bold;display: block; text-decoration: none;">
+                                        ${bundle.nav_account }
+                                      </a>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </div>
+                            </a>
+                            <br />
+                            <a href="/pages/admin/index.jspx" style="display: block" >
+                              <div>
+                                <table id="adminNav" cellpadding="0" cellspacing="0" >
+                                  <tr>
+                                    <td align="left" width="48px;">
+                                      <a href="/pages/admin/index.jspx" style="display: block">
+                                        <img alt="" src="/images/nav/admin.png" />
+                                      </a>
+                                    </td>
+                                    <td valign="middle" align="right">
+                                      <a href="/pages/admin/index.jspx" style="font-weight: bold;display: block; text-decoration: none;">
+                                        ${bundle.nav_admin }
+                                      </a>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </div>
+                            </a>
+                            <br />
+                            <a href="/pages/help.jspx" style="display: block" >
+                              <div>
+                                <table id="helpNav" cellpadding="0" cellspacing="0" >
+                                  <tr>
+                                    <td align="left" width="48px;">
+                                      <a href="/pages/help.jspx" style="display: block">
+                                        <img alt="" src="/images/nav/help.png" />
+                                      </a>
+                                    </td>
+                                    <td valign="middle" align="right">
+                                      <a href="/pages/help.jspx" style="font-weight: bold;display: block; text-decoration: none;">
+                                        ${bundle.nav_help }
+                                      </a>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </div>
+                            </a>
+                            <br />
+                            	<span>
+                            		<a href="http://www.jspx-bay.sourceforge.net" target="blank" title="Jspx">
+		                            <img alt="" src="/login/logo.png" />
+                            		</a>
+                            	</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3" >
+			              <script type="text/javascript"><!--
+			google_ad_client = "pub-3210643720408501";
+			/* 728x90, created 5/26/10 */
+			google_ad_slot = "2454685107";
+			google_ad_width = 728;
+			google_ad_height = 90;
+			//-->
+			</script>
+				<script type="text/javascript"
+				src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+				</script>
+              </td>
+            </tr>
+            
+            <tr>
+              <td colspan="3" >
+                <table width="100%" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td  class="footerSideR">
+                    </td>
+                    <td align="right" class="footer">
+                      version 2.0
+                    </td>
+                    <td align="center" class="footer">
+                      powered by	<a href="mailto:support.jspx@gmail.com"	>jspx</a>
+                    </td>
+                    <td align="left" class="footer">
+                      Copyrights © Bay-jspx 
+                      2008-${this.year }
+                    </td>
+                    <td  class="footerSideL">
+                    </td>
+                  </tr>
+                </table>
+                <!-- Nothing here -->
+              </td>
+            </tr>
+          </table>
+        </center>
+      </body>
+    </html>
+  </page>

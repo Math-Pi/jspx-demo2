@@ -1,0 +1,247 @@
+<page master="/master/site.master" encode="windows-1256"  deniedRoles="Data Entry"
+controller="org.bay.jspx.demo2.web.controller.account.SearchBills">
+	<contentHolder id="navholder">
+		<a href="/pages/customers/index.jspx" >
+	 dir="${bundle.account}"
+		</a>
+		:
+		<a href="/pages/accounts/searchBill.jspx" >
+	 ${bundle.a_cust_bill_rep}	
+		</a>
+	</contentHolder>
+	<contentHolder id="mainholder">
+	
+	<form  method="post"   style="width: 80%">
+		<center>
+				<table  cellpadding="5px" cellspacing="5px" id="formTable">
+				<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.bill_id}
+						</td>
+						<td align="right">
+            					<input type="text" maxLength="4" id="serial_num"  size="4" width="50px" />
+            					 <validator type="numeric" control_to_validate="serial_num" message="${bundle.numeric}" group="x" />
+						</td>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_id}
+						</td>
+						<td align="right">
+							<span >
+            					<input type="text" maxLength="4" id="custId" value="${cust.id }" size="4" width="50px"/>
+            					 <validator type="numeric" control_to_validate="custId" message="${bundle.numeric}" group="x" />
+       						</span>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_name}
+						</td>
+						<td align="right">
+            				<input type="text" maxLength="150" id="custName" value="${cust.name}"/>
+						</td>
+						 <td align="right" class="jspx-demoLabel">
+	                    ${bundle.form_ref}
+	                  </td>
+	                  <td align="right">
+	                    <select id="ref"  >
+	                    	<option ></option>
+	                      <datalookup  datasource="${sql.data_source}" sql="${sql.get_ref}" key="${sql.id_key}" value="${sql.name_key}" />
+	                    </select>
+	                  </td>
+					</tr>
+					<tr rendered="false">
+						<td align="right" class="jspx-demoLabel">
+							${bundle.f_bill_date}
+						</td>
+						<td align="right" colspan="3">
+							<table>
+								<tr>
+									<td>
+											${bundle.f_from}
+									</td>
+									<td>
+										<calendar dateformat="dd/MM/yyyy" id="entryDateFrom" />
+									</td>
+									<td>
+										${bundle.f_to}
+									</td>
+									<td>
+										<calendar dateformat="dd/MM/yyyy" id="entryDateTo" />
+									</td>
+								</tr>
+							</table>
+
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_bill_date}
+						</td>
+						<td align="right" colspan="3">
+							<table>
+								<tr>
+									<td>
+											${bundle.f_from}
+									</td>
+									<td>
+										<calendar dateformat="dd/MM/yyyy" id="issueDateFrom" />
+									</td>
+									<td>
+										${bundle.f_to}
+									</td>
+									<td>
+										<calendar dateformat="dd/MM/yyyy" id="issueDateTo" />
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.f_bill_amount}
+						</td>
+						<td align="right" colspan="3">
+							<table>
+								<tr>
+									<td>
+											${bundle.f_from}
+									</td>
+									<td>
+										<input type="text" id="amountFrom"  />
+                    					<validator type="numeric" control_to_validate="amountFrom" message="${bundle.numeric}" group="x" />
+									</td>
+									<td>
+										${bundle.f_to}
+									</td>
+									<td>
+										<input type="text" id="amountTo"  />
+                    					<validator type="numeric" control_to_validate="amountTo" message="${bundle.numeric}" group="x" />
+									</td>
+								</tr>
+							</table>
+
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+						${bundle.bill_status}
+						</td>
+						<td align="right">
+							<select id="billDel" >
+								<option ></option>
+								<option value="0" >${bundle.f_active }</option>
+								<option value="1" >${bundle.f_del}</option>
+							</select>
+						</td>
+						<td align="right" class="jspx-demoLabel">
+						</td>
+						<td align="right" dir="${bundle.dir}">
+						</td>
+					</tr>
+				<tr>
+					<td height="10" align="center" colspan="4">
+						<br />
+							<linkCommand onserverclick="showResults" id="search">
+								<img src="/images/action/searchUsers${bundle.lang}.png" border="0" group="x"/>
+							</linkCommand>
+						<span id="loadingImg" style="display:none;">
+						     	${bundle.wait}
+					    	<br />
+					    	<img alt="" src="/images/loading.gif" />
+					   	</span>
+						<br />
+					</td>
+				</tr>
+
+				<tr>
+					<td colspan="4">
+			<datatable casesensitive="true" width="100%"  id="bills" datasource="${sql.data_source}" pagesize="20"
+							table="" sql="${sql.searchBills}"
+							bindtoclass="org.bay.jspx.demo2.engine.model.Customer"
+							class="jspxTable" headerclass="jspxTableHeader" new="false"
+							rowclass="jspxTableEvenRow" selectedrowclass="jspxTableSelectedRow"
+							tdclass="jspxTd" dateformat="dd/MM/yyyy HH:mm" showrowindex="false"
+							startrowindex="1" tdclass="jspxTd" noresults="${bundle.noCustomerBills}"
+							noresultsclass="ie" rendered="false" var="bill">
+							
+							<dataparam name="bID" control="serial_num"
+								expression="B.serial_num like '%bID%'"></dataparam>
+								
+							<dataparam name="custId" control="custId"
+								expression="B.CUSTOMER_ID= custId"></dataparam>
+							
+							
+							<dataparam name="custName" control="custName"
+								expression="c.NAME like '%custName%'"></dataparam>
+								
+							<dataparam name="issueDateTo" control="issueDateTo" expression="(B.ISSUE_DATE) <= STR_TO_DATE('issueDateTo','%e/%m/%Y')"></dataparam>
+							<dataparam name="issueDateFrom" control="issueDateFrom" expression="(B.ISSUE_DATE) >= STR_TO_DATE('issueDateFrom','%e/%m/%Y')"></dataparam>
+							
+							<dataparam name="billAmountFrom" control="amountFrom"
+								expression="AMOUNT_DEPIT>=billAmountFrom"></dataparam>
+								
+							<dataparam name="billAmountTo" control="amountTo"
+								expression="AMOUNT_DEPIT<=billAmountTo"></dataparam>
+								
+							<dataparam name="billDel" control="billDel"
+								expression="B.DELETED=billDel"></dataparam>
+								
+								
+							<dataparam name="refId" control="ref"
+								expression="R.ID= refId"></dataparam>
+							
+							
+							
+							
+							<datacolumn text="ÇáãÈáÛ" fieldname="AMOUNT_DEPIT" type="NUMBER"  sortable="true" />
+							<datacolumn text="${bundle.f_ref}" fieldname="COMMENT"	type="string" sortable="true" rendered="false"/>
+							<datacolumn text="${bundle.form_ref}" fieldname="R_NAME"	type="string" sortable="true" />
+							
+							<datacolumn text=" ${bundle.bill_id}" fieldname="serial_num"	type="string" sortable="true" >
+								<itemtemplate>
+									<a href="/pages/accounts/viewBill.jspx?id=${bill.id}" style="text-decoration: underline;" >${bill.serial_num}</a>
+								</itemtemplate>
+							</datacolumn>
+							<datacolumn text="${bundle.form_bill_date}" fieldname="issue_date"	type="date" sortable="true" dateformat="dd/MM/yyyy"/>
+							
+							<datacolumn text="${bundle.form_cust_name}" fieldname="c_name"	type="string" sortable="true" >
+								<itemtemplate>
+									<a href="/pages/customers/viewCustomer.jspx?id=${bill.customer_id}" style="text-decoration: underline;" >${bill.c_name}</a>
+								</itemtemplate>
+							</datacolumn>
+							<datacolumn text="ãÏÎá ÇáÝÇÊæÑÉ" 	 sortable="true"  rendered="false">
+								<itemtemplate>
+									<a href="/pages/admin/viewUser.jspx?id=${bill.U_ID}" style="text-decoration: underline;" >${bill.U_NAME}</a>
+								</itemtemplate>
+							</datacolumn>
+							<datacolumn text="${bundle.f_bill_date}" fieldname="creation_date"	type="date" sortable="true" dateformat="dd/MM/yyyy"/>
+							<datacolumn text=" ${bundle.bill_deleted}" fieldname="BDB_NAME"	type="string" sortable="true" />
+
+
+							<exporttoexcel  rowstoexport="all" command="${bundle.form_excel}"  filename="AllCustomersReport.xls"/>
+							<footer class="jspxTableFooter" message="${bundle.footer}" firstcommandtext="${bundle.first}"
+								lastcommandtext="${bundle.last}" prevcommandtext="${bundle.prev}"
+								nextcommandtext="${bundle.next}" />
+						</datatable>
+			</td>
+			</tr>
+					<tr>
+						<td colspan="4"  rendered="${this.showTotal }">
+							<label class="jspx-demoLabel" >${bundle.form_trade_vol}</label>
+							&nbsp;
+							&nbsp;
+							${this.totalAmount }
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4" rendered="${this.showPrint}">
+							<linkCommand onserverClick="printReport">
+								<img src="/images/action/printReport${bundle.lang}.png" />
+							</linkCommand>
+						</td>
+					</tr>
+			</table>
+		</center>
+	</form>
+	</contentHolder>
+</page>

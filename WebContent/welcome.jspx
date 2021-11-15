@@ -1,0 +1,86 @@
+<page master="/master/site.master" encode="windows-1256" controller="org.bay.jspx.demo2.web.controller.Welcome">
+	<contentHolder id="navholder"> ${bundle.welcome }</contentHolder>
+	<contentHolder id="mainholder">
+			<form> 
+		<center>
+			<table width="100%">
+				<tr>
+					<td align="center" colspan="3">
+					</td>
+				</tr>
+				<tr>
+					<td align="center" >
+						<a href="/pages/customers/searchCustomer.jspx">
+							<img alt="" src="/images/prev/searchCust.png"/>
+							<br/>
+							${bundle.a_cust_search_rep}
+						</a>
+					</td>
+					<td align="center" >
+						<a href="/pages/customers/addCustomer.jspx"  deniedRoles="Auditor,Accountant">
+							<img alt="" src="/images/prev/addCust.png"/>
+							<br/>
+							${bundle.a_add_cust}
+						</a>
+					</td>
+					<td align="center" >
+						<a href="/pages/customers/customerReport.jspx">
+							<img alt="" src="/images/prev/customerReport.png"/>
+							<br/>
+							${bundle.a_cust_rep }
+						</a>
+					</td>
+				</tr>
+				<tr deniedRoles="Data Entry">
+					<td align="center" >
+						<a href="/pages/accounts/searchBill.jspx">
+							<img alt="" src="/images/prev/searchBill.png"/>
+							<br/>
+							${bundle.a_cust_bill_rep}
+						</a>
+					</td>
+					<td>
+					</td>
+					<td align="center" >
+						<a href="/pages/accounts/addBill.jspx" >
+							<img alt="" src="/images/prev/addBill.png"/>
+							<br/>
+							${bundle.a_add_bill}
+						</a>
+					</td>
+				</tr>
+				<tr >
+					<td align="center" >
+						<a href="/pages/admin/changePassword.jspx">
+							<img alt="" src="/images/prev/changePassword.png"/>
+							<br/>
+							${bundle.a_chpswd}
+						</a>
+					</td>
+					<td align="center" >
+						<a href="/pages/admin/searchUsers.jspx">
+							<img alt="" src="/images/prev/searchUser.png"/>
+							<br/>
+							${bundle.a_search_user}
+						</a>
+					</td>
+					<td align="center" >
+						<a href="/pages/admin/addUser.jspx">
+							<img alt="" src="/images/prev/addUser.png"/>
+							<br/>
+							${bundle.a_add_user}
+						</a>
+					</td>
+				</tr>
+			</table>
+		</center>
+		 <script language="JavaScript" type="text/javascript">
+			focusUserName();
+			function  focusUserName()
+			{
+				document.getElementById("barCode").focus();
+			}
+    </script>
+			</form>
+	</contentHolder>
+</page>

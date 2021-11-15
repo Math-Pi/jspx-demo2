@@ -1,0 +1,189 @@
+<page master="/master/site.master" encode="windows-1256"   deniedRoles="Data Entry"
+controller="org.bay.jspx.demo2.web.controller.account.ViewAccountSheet">
+	<contentHolder id="navholder">
+		<a href="/pages/customers/index.jspx" >
+	 dir="${bundle.account}"
+		</a>
+		:
+	 ⁄—÷ ﬂ‘› Õ”«» 	
+		
+	 </contentHolder>
+	<contentHolder id="mainholder">
+	<form   style="width: 80%">
+	
+		<center>
+				<table cellpadding="5px" cellspacing="5px" id="formTable" width="100%">
+					<tr >
+                  <td colspan="4">
+                    <fieldset>
+                      <legend>${bundle.form_cust_details}</legend>
+                      <table cellpadding="4px" cellspacing="4px">
+		                <tr>
+		                  <td align="left" class="jspx-demoLabel">
+		                    ${bundle.form_cust_id}
+		                  </td>
+		                  <td align="right">
+		                      ${cust.id }
+		                  </td>
+		                  <td align="left" class="jspx-demoLabel" colspan="2">
+		                  	<a href="/pages/customers/viewCustomer.jspx?id=${cust.id }" >
+		                    ${bundle.form_full_cust_details}
+		                  	</a>
+		                  </td>
+		                </tr>
+                        <tr>
+                          <td align="left" class="jspx-demoLabel">
+                            ${bundle.form_cust_name}
+                          </td>
+                          <td align="right">
+                              ${cust.name}
+                          </td>
+                          <td align="left" class="jspx-demoLabel">
+                            ${bundle.form_cust_acc_id}
+                          </td>
+                          <td align="right" dir="ltr">
+                              <label  style=" font-weight: bold;  " >
+                                ${cust.accountNum1 }
+                              </label>
+                              -
+                              <label  style=" font-weight: bold;  " >
+                                ${cust.accountNum2 }
+                              </label>
+                              -
+                              <label id="accountNum1" style=" font-weight: bold;  " >
+                                ${cust.accountNum3 }
+                              </label>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td align="left" class="jspx-demoLabel">
+                            ${bundle.form_cust_stock}
+                          </td>
+                          <td align="right">
+                              ${cust.stockShare}
+                          </td>
+                        </tr>
+                      </table>
+                    </fieldset>
+                  </td>
+                </tr>
+				<tr>
+					<td align="right" class="jspx-demoLabel">
+						${bundle.form_bill_date}
+					</td>
+					<td align="right" colspan="3">
+						<table>
+							<tr>
+								<td>
+										${bundle.f_from}
+								</td>
+								<td>
+									<calendar dateformat="yyyy-MM-dd" id="issueDateFrom" />
+								</td>
+								<td>
+									${bundle.f_to}
+								</td>
+								<td>
+									<calendar dateformat="yyyy-MM-dd" id="issueDateTo"  />
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+					<tr>
+						 <td align="left" class="jspx-demoLabel">
+	                    ${bundle.form_ref}
+	                  </td>
+	                  <td align="right">
+	                    <select id="ref"   >
+	                    	<option ></option>
+	                      <datalookup  datasource="${sql.data_source}" sql="${sql.get_ref}" key="${sql.id_key}" value="${sql.name_key}" />
+	                    </select>
+	                  </td>
+					</tr>
+					<tr>
+						<td colspan="4" align="center">
+							<linkCommand onserverclick="refresh" id="search">
+							<img src="/images/action/refreshAccount${bundle.lang}.png" border="0" group="x"/>
+						</linkCommand>
+						</td>
+					</tr>
+				<tr>
+					<td colspan="3" >
+						<label class="jspx-demoLabel">
+							ﬂ‘› Õ”«» «·„”«Â„
+						</label>
+					</td>
+				</tr>
+				<tr>
+						<td colspan="4">
+							
+							<datatable casesensitive="true" width="100%"  id="customerBills" datasource="${sql.data_source}" pagesize="50"
+							table="" sql="${sql.cutomerAccountSheet}"
+							bindtoclass="org.bay.jspx.demo2.engine.model.Customer"
+							class="jspxTable" headerclass="jspxTableHeader" new="false"
+							rowclass="jspxTableEvenRow" selectedrowclass="jspxTableSelectedRow"
+							tdclass="jspxTd" dateformat="dd/MM/yyyy HH:mm" showrowindex="false"
+							startrowindex="1" tdclass="jspxTd" noresults="${bundle.noCustomerAccountSheet}"
+							noresultsclass="ie" rendered="true" var="bill" autobind="true">
+							
+							<dataparam name="custId" request="id"
+								expression="B.CUSTOMER_ID= custId"></dataparam>
+							<dataparam name="issueDateTo" control="issueDateTo" expression="(B.ISSUE_DATE) <= STR_TO_DATE('issueDateTo','%e/%m/%Y')"></dataparam>
+							<dataparam name="issueDateFrom" control="issueDateFrom" expression="(B.ISSUE_DATE) >= STR_TO_DATE('issueDateFrom','%e/%m/%Y')"></dataparam>
+							
+							
+							<dataparam name="refId" control="ref"
+								expression="R.ID= refId"></dataparam>
+							
+							
+							
+							<datacolumn text="«·„»·€" fieldname="AMOUNT_DEPIT" type="NUMBER"  sortable="true" />
+							<datacolumn text="${bundle.f_ref}" fieldname="COMMENT"	type="string" sortable="true" />
+							<datacolumn text="${bundle.form_ref}" fieldname="R_NAME"	type="string" sortable="true" />
+							<datacolumn text="${bundle.bill_id}" fieldname="serial_num"	type="string" sortable="true" >
+								<itemtemplate>
+									<a href="/pages/accounts/viewBill.jspx?id=${bill.id}" style="text-decoration: underline;" >${bill.serial_num}</a>
+								</itemtemplate>
+							</datacolumn>
+							<datacolumn text="${bundle.form_bill_date}" fieldname="issue_date"	type="date" sortable="true" dateformat="dd/MM/yyyy"/>
+
+
+
+							<footer class="jspxTableFooter" message="${bundle.footer}" firstcommandtext="${bundle.first}"
+								lastcommandtext="${bundle.last}" prevcommandtext="${bundle.prev}"
+								nextcommandtext="${bundle.next}" />
+								
+								<exporttoexcel  filename="${request.attributes.fileName}.xls" rowstoexport="all" command="${bundle.form_excel}"/>
+						</datatable>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4"  rendered="${this.showPrint}">
+							<label class="jspx-demoLabel" >${bundle.form_trade_vol}</label>
+							&nbsp;
+							&nbsp;
+							${this.totalAmount }
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4"  rendered="${this.showPrint}">
+							<label class="jspx-demoLabel" >${bundle.form_trade_ratio}</label>
+							&nbsp;
+							&nbsp;
+							${this.ratio }
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4" rendered="${this.showPrint}">
+							<linkCommand onserverClick="printReport">
+								<img src="/images/action/printReport${bundle.lang}.png" />
+							</linkCommand>
+						</td>
+					</tr>
+				</table>
+				
+		</center>
+		</form>
+	</contentHolder>
+</page>

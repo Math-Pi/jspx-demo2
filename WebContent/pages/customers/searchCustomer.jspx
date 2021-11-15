@@ -1,0 +1,267 @@
+<page master="/master/site.master" encode="windows-1256" controller="org.bay.jspx.demo2.web.controller.customer.SearchCustomer">
+	<contentHolder id="navholder">
+		<a href="/pages/customers/index.jspx" >
+	  ${bundle.nav_cust }
+		</a>
+		:
+		<a href="/pages/customers/searchCustomer.jspx" >
+	 ${bundle.a_cust_search_rep}	
+		</a>
+	</contentHolder>
+	<contentHolder id="mainholder">
+	
+	<form  method="post"  onsubmit="sw('search')" style="width: 80%" accept-charset="cp1256">
+		<center>
+		<ajaxPanel>
+			<ajaxLoading>
+				<span class="jspxInfo">
+					${bundle.wait }
+					<img alt="" src="/images/loading.gif" />
+				</span>
+			</ajaxLoading>
+				<table  cellpadding="5px" cellspacing="5px" id="formTable">
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_id}
+						</td>
+						<td align="right">
+							<span >
+            					<input type="text" maxLength="4" id="custId" size="4" width="50px" />
+            					 <validator type="numeric" control_to_validate="custId" message="${bundle.numeric}" group="x" />
+       						</span>
+						</td>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_name}
+						</td>
+						<td align="right">
+							<span >
+            					<input type="text" maxLength="150" id="custName" />
+       						</span>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_passport}
+						</td>
+						<td align="right">
+							<span >
+            					<input type="text" maxLength="25" id="pass" />
+       						</span>
+						</td>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_phone}
+						</td>
+						<td align="right">
+							<span >
+            					<input type="text" maxLength="10" id="phone" />
+            					 <validator type="numeric" control_to_validate="phone" message="${bundle.numeric}" group="x" />
+       						</span>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_marital}
+						</td>
+						<td align="right">
+							<select id="mart"   >
+								<option ></option>
+			                	<datalookup  datasource="${sql.data_source}" sql="${sql.get_martial}" key="${sql.id_key}" value="${sql.name_key}" />
+            				</select>
+						</td>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_grade}
+						</td>
+						<td align="right">
+								<select id="grade"   >
+								<option ></option>
+			                	<datalookup  datasource="${sql.data_source}" sql="${sql.get_grade}" key="${sql.id_key}" value="${sql.name_key}" />
+            					</select>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+						${bundle.form_cust_job}
+						</td>
+						<td align="right">
+            					<input type="text" maxLength="60"  id="job"/>
+						</td>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_gender} 
+						</td>
+						<td align="right" >
+							<select id="gender" >
+								<option ></option>
+								<option value="1" >${bundle.male }</option>
+								<option value="2" >${bundle.female }</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+						${bundle.form_cust_status}
+						</td>
+						<td align="right">
+							<select id="del" >
+								<option ></option>
+								<option value="0" >${bundle.f_active }</option>
+								<option value="1" >${bundle.f_del}</option>
+							</select>
+						</td>
+						<td align="right" class="jspx-demoLabel">
+						</td>
+						<td align="right" dir="${bundle.dir}">
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_member_date}
+						</td>
+						<td align="right" colspan="3">
+							<table>
+								<tr>
+									<td>
+											${bundle.f_from }
+									</td>
+									<td>
+										<calendar dateformat="dd/MM/yyyy" id="fromCal" />
+									</td>
+									<td>
+
+											${bundle.f_to }
+									</td>
+									<td>
+										<calendar dateformat="dd/MM/yyyy" id="toCal" />
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_bod}
+						</td>
+						<td align="right" colspan="3">
+							<table>
+								<tr>
+									<td>
+											${bundle.f_from }
+									</td>
+									<td>
+										<calendar dateformat="dd/MM/yyyy" id="bdFrom" />
+									</td>
+									<td>
+											${bundle.f_to }
+									</td>
+									<td>
+										<calendar dateformat="dd/MM/yyyy" id="bdTo" />
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				<tr>
+					<td height="10" align="center" colspan="4">
+						<br />
+						<linkCommand onserverclick="showResults" id="search">
+							<img src="/images/action/searchUsers${bundle.lang}.png" border="0"/>
+						</linkCommand>
+						<span id="loadingImg" style="display:none;">
+							${bundle.wait}
+					    	<br />
+					    	<img alt="" src="/images/loading.gif" />
+					   	</span>
+						<br />
+					</td>
+				</tr>
+
+				<tr>
+					<td colspan="4">
+			
+			<datatable casesensitive="true" width="100%"  id="customersList" datasource="${sql.data_source}"
+							table="" sql="${sql.searchCustomers}"
+							bindtoclass="org.bay.jspx.demo2.engine.model.Customer"
+							class="jspxTable" headerclass="jspxTableHeader" new="false"
+							rowclass="jspxTableEvenRow" selectedrowclass="jspxTableSelectedRow"
+							tdclass="jspxTd" dateformat="dd/MM/yyyy HH:mm" showrowindex="false"
+							startrowindex="1" tdclass="jspxTd" noresults="${bundle.noCustomers}"
+							noresultsclass="ie" rendered="false" var="var" >
+
+							<dataparam name="custId" control="custId"
+								expression="C.ID=custId"></dataparam>
+								
+							<dataparam name="custName" control="custName"
+								expression="c.NAME like '%custName%'"></dataparam>
+								
+							<dataparam name="pass" control="pass"
+								expression="PASSPORT_NUM like '%pass%'"></dataparam>
+								
+							<dataparam name="custPhone" control="phone"
+								expression="PHONE like '%custPhone%'"></dataparam>
+								
+							<dataparam name="custGender" control="gender"
+								expression="GENDER=custGender"></dataparam>
+								
+							<dataparam name="custJob" control="job"
+								expression="JOB like '%custJob%'"></dataparam>
+								
+							<dataparam name="custGrade" control="grade"
+								expression="GRADE=custGrade"></dataparam>
+								
+								
+							<dataparam name="custMart" control="mart"
+								expression="MARTIAL_STATUS=custMart"></dataparam>
+								
+								
+							<dataparam name="custDel" control="del"
+								expression="DELETED=custDel"></dataparam>
+								
+							<dataparam name="from_Bdate" control="bdFrom"
+								expression="(BIRTH_DATE) >= STR_TO_DATE('from_Bdate','%e/%m/%Y')"></dataparam>
+								
+								
+							<dataparam name="to_Bdate" control="bdTo"
+								expression="(BIRTH_DATE) <= STR_TO_DATE('to_Bdate','%e/%m/%Y')"></dataparam>
+								
+							<dataparam name="from_date" control="fromCal" expression="(CREATION_DATE) >= STR_TO_DATE('from_date 00:00:00','%e/%m/%Y %H:%i:%s')"></dataparam>
+							<dataparam name="to_date" control="toCal" expression="(CREATION_DATE) <= STR_TO_DATE('to_date 23:59:59','%e/%m/%Y %H:%i:%s')"></dataparam>
+
+							<datacolumn text="${bundle.form_cust_id }" fieldname="ID"	type="number" sortable="true"/>
+							<datacolumn text="${bundle.form_cust_name}" fieldname="NAME"	type="string" sortable="true" >
+								<itemtemplate>
+									<a href="/pages/customers/viewCustomer.jspx?id=${var.id}" style="text-decoration: underline;">${var.name}</a>
+								</itemtemplate>
+							</datacolumn>
+							<datacolumn text="${bundle.form_phone}" fieldname="PHONE" type="string" />
+							<datacolumn text="${bundle.form_passport}" fieldname="PASSPORT_NUM" type="string" rendered="false"/>
+							<datacolumn text="${bundle.form_cust_bod}" fieldname="birth_date"	type="date" sortable="true" dateformat="dd/MM/yyyy"/>
+
+							<datacolumn text="${bundle.form_cust_gender}" fieldname="c_gender"	type="string" sortable="true" />
+							<datacolumn text="${bundle.form_stock_count}" fieldname="stock_share"	type="string" sortable="true" />
+							<datacolumn text="${bundle.form_member_date}" fieldname="creation_date"	type="date" sortable="true" dateformat="dd/MM/yyyy"/>
+							
+							<datacolumn text="${bundle.form_cust_grade}" fieldname="g_name"	type="string" sortable="true" rendered="false"/>
+							<datacolumn text="${bundle.form_cust_job}" fieldname="job"	type="string" sortable="true"  rendered="false"/>
+							<datacolumn text="${bundle.form_cust_marital}" fieldname="m_name"	type="string" sortable="true"  rendered="false"/>
+							<datacolumn text=" ${bundle.f_del }" fieldname="BDB_NAME"	type="string" sortable="true" />
+
+
+							<exporttoexcel  filename="SearchCustomers.xls" rowstoexport="all" command="${bundle.form_excel}"/>
+							<footer class="jspxTableFooter" message="${bundle.footer}" firstcommandtext="${bundle.first}"
+								lastcommandtext="${bundle.last}" prevcommandtext="${bundle.prev}"
+								nextcommandtext="${bundle.next}" />
+						</datatable>
+			</td>
+			</tr>
+			<tr>
+						<td colspan="4" rendered="${this.showPrint}">
+							<linkCommand onserverClick="printReport">
+								<img src="/images/action/printReport${bundle.lang}.png" />
+							</linkCommand>
+						</td>
+					</tr>
+			</table>
+			</ajaxPanel>
+		</center>
+	</form>
+	</contentHolder>
+</page>

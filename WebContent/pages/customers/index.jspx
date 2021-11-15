@@ -1,0 +1,38 @@
+<page master="/master/site.master" encode="windows-1256" >
+	<contentHolder id="navholder">
+		<a href="/pages/customers/index.jspx" >
+	  ${bundle.nav_cust }
+		</a>
+	 </contentHolder>
+	<contentHolder id="mainholder">
+		<center>
+			<table width="100%">
+				<tr>
+					<td align="center" width="50%">
+						<a href="/pages/customers/searchCustomer.jspx">
+							<img alt="" src="/images/prev/searchCust.png"/>
+							<br/>
+							${bundle.a_cust_search_rep}
+						</a>
+					</td>
+					<td align="center" width="50%">
+						<a href="/pages/customers/addCustomer.jspx"  deniedRoles="Auditor,Accountant">
+							<img alt="" src="/images/prev/addCust.png"/>
+							<br/>
+							${bundle.a_add_cust}
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td align="center" width="50%">
+						<a href="/pages/customers/customerReport.jspx">
+							<img alt="" src="/images/prev/customerReport.png"/>
+							<br/>
+							${bundle.a_cust_rep}
+						</a>
+					</td>
+				</tr>
+			</table>
+		</center>
+	</contentHolder>
+</page>

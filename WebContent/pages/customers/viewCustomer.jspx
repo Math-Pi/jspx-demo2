@@ -1,0 +1,311 @@
+<page master="/master/site.master" encode="windows-1256" 
+controller="org.bay.jspx.demo2.web.controller.customer.ViewCustomer">
+	<contentHolder id="navholder">
+		<a href="/pages/customers/index.jspx" >
+	  ${bundle.nav_cust }
+		</a>
+		:
+	 ${bundle.nav_view_cust } 	
+		
+	 </contentHolder>
+	<contentHolder id="mainholder">
+	<form   style="width: 80%">
+	
+		<center>
+			<table>
+				<tr>
+					<td>
+			<fieldset>
+				<legend>${bundle.form_cust_details } </legend>
+				<table cellpadding="5px" cellspacing="5px" id="formTable" width="100%">
+					<tr rendered="${this.isDeleted }" class="error">
+						<td colspan="4">
+							${bundle.del_cust } 
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_id}
+						</td>
+						<td align="right">
+							<span >
+            					${cust.id }
+       						</span>
+						</td>
+						<td align="left" colspan="2" rowspan="3" >
+							<img src="/pages/customers/photo.jspx?id=${cust.id }&amp;gender=${cust.gender}" style="min-width: 128px; width: 128px;" />
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_acc_id}
+						</td>
+						<td align="right" dir="ltr">
+							<span >
+            					<label  style=" font-weight: bold;  " >
+            					${cust.accountNum1 } 
+            					</label>
+            					-
+            					<label  style=" font-weight: bold;  " >
+            					${cust.accountNum2 }
+            					</label>
+            					-
+            					<label id="accountNum1" style=" font-weight: bold;  " >
+            					${cust.accountNum3 } 
+            					</label>
+       						</span>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_name}
+						</td>
+						<td align="right" colspan="2">
+							<span >
+            					${cust.name}
+       						</span>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_passport}
+						</td>
+						<td align="right">
+							${cust.passportNum}
+						</td>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_state}
+						</td>
+						<td align="right">
+								${cust.address.emirate.name}
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_reg}
+						</td>
+						<td align="right">
+								${cust.regNum}
+						</td>
+						<td align="right" class="jspx-demoLabel">
+						${bundle.form_cust_pb}
+						</td>
+						<td align="right">
+							${cust.address.postOfficeNumber}
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_phone}
+						</td>
+						<td align="right">
+							${cust.phone}
+						</td>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_phone2}
+						</td>
+						<td align="right">
+							${cust.phone2}
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+						${bundle.form_cust_bod}
+						</td>
+						<td align="right">
+								${cust.birthDate }
+						</td>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_marital}
+						</td>
+						<td align="right">
+								${cust.martialStatus.name}
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+						${bundle.age }
+						</td>
+						<td align="right">
+								${cust.age }
+						</td>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_gender} 
+						</td>
+						<td align="right" colspan="3" dir="ltr">
+							${cust.genderString }
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_grade}
+						</td>
+						<td align="right">
+							${cust.grade.name}
+						</td>
+						<td align="right" class="jspx-demoLabel">
+						${bundle.form_cust_job}
+						</td>
+						<td align="right">
+            					${cust.job}
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+						${bundle.form_cust_address}
+						</td>
+						<td align="right" >
+							${cust.address.location}
+						</td>
+						<td align="right" class="jspx-demoLabel">
+						${bundle.form_cust_home}
+						</td>
+						<td align="right">
+							${cust.address.home} 
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+						${bundle.form_cust_stock}
+						</td>
+						<td align="right" >
+							${cust.stockShare}
+						</td>
+						<td align="right" class="jspx-demoLabel">
+						${bundle.form_member_date}
+						</td>
+						<td align="right">
+							${cust.creationDate} 
+						</td>
+					</tr>
+					<tr>
+						<td  align="center">
+							<a href="/pages/customers/addCustomer.jspx?id=${cust.id }"  >
+								<img src="/images/action/editUser${bundle.lang}.png" />
+							</a>
+						</td>
+						<td align="center" >
+							<linkCommand   onserverclick="deleteUser"  
+							confirmation="${bundle.cust_del_conf }" 
+							rendered="${this.isActive}">
+								<img src="/images/action/delUser${bundle.lang}.png" />
+							</linkcommand>
+						</td>
+						<td align="center" >
+							<a href="/pages/accounts/addBill.jspx?custId=${cust.id }"   
+							rendered="${this.isActive}">
+								<img src="/images/action/addCustBill${bundle.lang}.png" />
+							</a>
+						</td>
+						<td align="center" >
+							<a href="/pages/accounts/accountSheet.jspx?id=${cust.id }"  
+							rendered="${this.isActive}">
+								<img src="/images/action/accountSheet${bundle.lang}.png" />
+							</a>
+						</td>
+					</tr><tr>
+					<td colspan="3" style="border-bottom-width: 1px;">
+					</td>
+				</tr>
+				<tr valign="bottom">
+					<td colspan="1">
+						<Linkcommand onserverclick="printId">
+							<img alt="" src="/images/action/cardF${bundle.lang}.png"/>
+							<br/>
+							ÿ»«⁄… ÊÃÂ »ÿ«ﬁ… «·⁄÷ÊÌ…
+						</Linkcommand>
+					</td>
+					<td >
+						<Linkcommand onserverclick="printIdBack">
+							<img alt="" src="/images/action/cardB${bundle.lang}.png"/>
+							<br/>
+							ÿ»«⁄… ŸÂ— »ÿ«ﬁ… «·⁄÷ÊÌ…
+						</Linkcommand>
+					</td>
+					<td >
+						<linkcommand onserverclick="printIdAll">
+							<img alt="" src="/images/action/cardA${bundle.lang}.png"/>
+							<br/>
+							ÿ»«⁄… »ÿ«ﬁ… «·⁄÷ÊÌ… ﬂ«„·…
+						</linkcommand>
+					</td>
+					<td >
+						<a href="/pages/customers/addCustomer.jspx">
+							<img alt="" src="/images/prev/addCust.png"/>
+							<br/>
+							${bundle.a_add_cust}
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<linkcommand onserverclick="downloadPassImg" rendered="${this.showPassImg}">
+							 Õ„Ì· ${bundle.form_passport_photo}
+						</linkcommand>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3" >
+						<label class="jspx-demoLabel">
+							›Ê« Ì— «·„”«Â„
+						</label>
+					</td>
+				</tr>
+				<tr>
+						<td colspan="4">
+							
+							<datatable casesensitive="true" width="100%"  id="customerBills" datasource="${sql.data_source}"
+							table="" sql="${sql.searchCustomerBills}"
+							bindtoclass="org.bay.jspx.demo2.engine.model.Customer"
+							class="jspxTable" headerclass="jspxTableHeader" new="false"
+							rowclass="jspxTableEvenRow" selectedrowclass="jspxTableSelectedRow"
+							tdclass="jspxTd" dateformat="dd/MM/yyyy HH:mm" showrowindex="false"
+							startrowindex="1" tdclass="jspxTd" noresults="${bundle.noCustomerBills}"
+							noresultsclass="ie" rendered="true" var="bill" autobind="true">
+							
+							<dataparam name="custId" request="id"
+								expression="B.CUSTOMER_ID= custId"></dataparam>
+								
+							
+							<datacolumn text="«·„»·€" fieldname="AMOUNT_DEPIT" type="NUMBER"  sortable="true" />
+							<datacolumn text="${bundle.f_ref}" fieldname="COMMENT"	type="string" sortable="true" />
+							<datacolumn text="${bundle.form_ref}" fieldname="R_NAME"	type="string" sortable="true" />
+							<datacolumn text="${bundle.bill_id}" fieldname="serial_num"	type="string" sortable="true" >
+								<itemtemplate>
+									<a href="/pages/accounts/viewBill.jspx?id=${bill.id}" style="text-decoration: underline;" >${bill.serial_num}</a>
+								</itemtemplate>
+							</datacolumn>
+							<datacolumn text="${bundle.form_bill_date}" fieldname="issue_date"	type="date" sortable="true" dateformat="dd/MM/yyyy"/>
+							<datacolumn text="„œŒ· «·›« Ê—…" 	 sortable="true" >
+								<itemtemplate>
+									<a href="/pages/admin/viewUser.jspx?id=${bill.U_ID}" style="text-decoration: underline;" >${bill.U_NAME}</a>
+								</itemtemplate>
+							</datacolumn>
+							<datacolumn text="${bundle.f_bill_date}" fieldname="creation_date"	type="date" sortable="true" dateformat="dd/MM/yyyy hh:mm a"/>
+							<datacolumn text=" ${bundle.bill_deleted}" fieldname="BDB_NAME"	type="string" sortable="true" />
+
+
+							<exporttoexcel  filename="CustomersBills.xls" rowstoexport="all" command="${bundle.form_excel}"/>
+							<footer class="jspxTableFooter" message="${bundle.footer}" firstcommandtext="${bundle.first}"
+								lastcommandtext="${bundle.last}" prevcommandtext="${bundle.prev}"
+								nextcommandtext="${bundle.next}" />
+								<exporttoexcel  filename="${request.attributes.fileName}.xls" rowstoexport="all" command="${bundle.form_excel}"/>
+						</datatable>
+						</td>
+					</tr><tr>
+						<td colspan="4" rendered="${this.showPrint}">
+							<linkCommand onserverClick="printReport">
+								<img src="/images/action/printReport${bundle.lang}.png" />
+							</linkCommand>
+						</td>
+					</tr>
+				</table>
+				
+			</fieldset>
+					</td>
+				</tr>
+			</table>
+		</center>
+		</form>
+	</contentHolder>
+</page>

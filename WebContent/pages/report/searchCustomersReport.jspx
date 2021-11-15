@@ -1,0 +1,55 @@
+<page master="/master/report.master" encode="windows-1256" 
+controller="org.bay.jspx.demo2.web.controller.report.ReportController">
+
+	<contentHolder id="mainholder">
+		
+		<table width="1024px">
+		<tr>
+        <td align="center" colspan="5">
+          <br />
+          <h1>
+				ﬂ‘› ${bundle.form_cust_details}Ì‰
+				</h1>
+				<br />
+				<hr />
+        </td>
+			</tr>
+			<tr>
+				<td>
+			<datatable casesensitive="true" width="100%"  id="reportTable" datasource="${sql.data_source}" pagesize="999999"
+							table="" sql="${sql.searchCustomers}"
+							bindtoclass="org.bay.jspx.demo2.engine.model.Customer"
+							class="jspxReportTable" headerclass="jspxReportTableHeader" new="false"
+							rowclass="jspxReportTableEvenRow" selectedrowclass="jspxReportTableSelectedRow"
+							tdclass="jspxReportTd" dateformat="dd/MM/yyyy HH:mm" showrowindex="false"
+							startrowindex="1" tdclass="jspxReportTd" noresults="${bundle.noCustomers}"
+							noresultsclass="ie" rendered="true" var="var" >
+
+							<datacolumn text="—ﬁ„ «·⁄÷ÊÌ…" fieldname="ID"	type="number" sortable="true"/>
+							<datacolumn text="${bundle.form_cust_name}" fieldname="NAME"	type="string" sortable="true" >
+								<itemtemplate>
+									<a href="/pages/customers/viewCustomer.jspx?id=${var.id}" style="text-decoration: underline;">${var.name}</a>
+								</itemtemplate>
+							</datacolumn>
+							<datacolumn text="${bundle.form_phone}" fieldname="PHONE" type="string" />
+							<datacolumn text="${bundle.form_passport}" fieldname="PASSPORT_NUM" type="string" />
+							<datacolumn text="${bundle.form_cust_bod}" fieldname="birth_date"	type="date" sortable="true" dateformat="dd/MM/yyyy"/>
+
+							<datacolumn text="${bundle.form_cust_gender}" fieldname="c_gender"	type="string" sortable="true" />
+							<datacolumn text="${bundle.form_stock_count}" fieldname="stock_share"	type="string" sortable="true" />
+							<datacolumn text="${bundle.form_member_date}" fieldname="creation_date"	type="date" sortable="true" dateformat="dd/MM/yyyy"/>
+							
+							<datacolumn text="${bundle.form_cust_grade}" fieldname="g_name"	type="string" sortable="true" />
+							<datacolumn text="${bundle.form_cust_job}" fieldname="job"	type="string" sortable="true" />
+							<datacolumn text="${bundle.form_cust_marital}" fieldname="m_name"	type="string" sortable="true" />
+							<datacolumn text=" „·€Ì" fieldname="BDB_NAME"	type="string" sortable="true" />
+
+
+
+							<footer rendered="false"/>
+						</datatable>
+				</td>
+			</tr>
+		</table>
+	</contentHolder>
+</page>

@@ -1,0 +1,148 @@
+<page master="/master/site.master" encode="windows-1256"  deniedRoles="Data Entry,Auditor"
+controller="org.bay.jspx.demo2.web.controller.account.AddNewBill">
+  <contentHolder id="navholder">
+    <a href="/pages/customers/index.jspx" >
+      dir="${bundle.account}"
+    </a>
+    :
+      ${this.navTitle }
+
+  </contentHolder>
+  <contentHolder id="mainholder">
+    <form  method="post" enctype="multipart/form-data"   onsubmit="sw('save')" style="width: 80%">
+
+      <center>
+        <table>
+          <tr>
+            <td>
+              <table cellpadding="5px" cellspacing="5px" id="formTable">
+                <tr>
+                  <td align="right" class="jspx-demoLabel">
+                    ${bundle.form_cust_id}
+                  </td>
+                  <td align="right">
+                    <span >
+                      <input type="text" maxLength="4" id="custId" value="${cust.id }" size="4" width="50px" onserverchange="updateCustomer" group="y"/>
+                      <validator type="required" indicator="${bundle.required}"  control_to_validate="custId" message="${bundle.required}" group="x" />
+                      <validator type="numeric" control_to_validate="custId" message="${bundle.numeric}" group="x" />
+                      <validator type="numeric" control_to_validate="custId" message="${bundle.numeric}" group="y" />
+                    </span>
+                  </td>
+                </tr>
+                <tr rendered="${this.showCust }">
+                  <td colspan="4">
+                    <fieldset>
+                      <legend>${bundle.form_cust_details}</legend>
+                      <table cellpadding="4px" cellspacing="4px">
+                        <tr>
+                          <td align="right" class="jspx-demoLabel">
+                            ${bundle.form_cust_name}
+                          </td>
+                          <td align="right">
+                              ${cust.name}
+                          </td>
+                          <td align="right" class="jspx-demoLabel">
+                            ${bundle.form_cust_acc_id}
+                          </td>
+                          <td align="right" dir="ltr">
+                              <label  style=" font-weight: bold;  " >
+                                ${cust.accountNum1 }
+                              </label>
+                              -
+                              <label  style=" font-weight: bold;  " >
+                                ${cust.accountNum2 }
+                              </label>
+                              -
+                              <label id="accountNum1" style=" font-weight: bold;  " >
+                                ${cust.accountNum3 }
+                              </label>
+                          </td>
+                        </tr>
+                        <tr>
+                        	<td colspan="4" class="jspx-demoLabel">
+                        		<a href="/pages/customers/viewCustomer.jspx?id=${cust.id }"  >
+		                    ${bundle.form_full_cust_details}
+		                  	</a>
+                        	</td>
+                        </tr>
+                      </table>
+                    </fieldset>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right" class="jspx-demoLabel">
+                    ${bundle.bill_id}
+                  </td>
+                  <td align="right">
+                    <span >
+                      <input type="text" maxLength="50" id="serial"  value="${bill.serialNum}"/>
+                      <validator type="required" indicator="${bundle.required}"  control_to_validate="serial" message="${bundle.required}" group="x" />
+                    </span>
+                  </td>
+                  <td align="right" class="jspx-demoLabel">
+                    ${bundle.f_bill_amount}
+                  </td>
+                  <td align="right">
+                    <input type="text" maxLength="50" id="amount"  value="${bill.amountDepit}"/>
+                    <validator type="numeric" control_to_validate="amount" message="${bundle.numeric}" group="x" />
+                    <validator type="required" indicator="${bundle.required}"  control_to_validate="amount" message="${bundle.required}" group="x" />
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right" class="jspx-demoLabel">
+                    ${bundle.form_ref}
+                  </td>
+                  <td align="right">
+                    <select id="ref"  value="${bill.refrence.id}"  >
+                      <datalookup  datasource="${sql.data_source}" sql="${sql.get_ref}" key="${sql.id_key}" value="${sql.name_key}" />
+                    </select>
+                  </td>
+                  <td align="right" class="jspx-demoLabel">
+                    ${bundle.form_bill_date}
+                  </td>
+                  <td align="right">
+                    <calendar  value="${bill.issueDate}" dateformat="dd/MM/yyyy" id="billDate"/>
+                    <validator type="required" indicator="${bundle.required}"  control_to_validate="billDate" message="${bundle.required}" group="x" />
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right" class="jspx-demoLabel">
+                    ${bundle.f_ref}
+                  </td>
+                  <td align="right" colspan="3">
+                    <input type="text" value="${bill.comment}"  maxlength="200" size="100" style="width: 500px;"/>
+                  </td>
+                	
+                </tr>
+                <tr>
+                  <td colspan="4" align="center">
+                  <br/>
+                  <br/>
+                  <br/>
+                    <linkCommand  onServerClick="saveBill"  group="x" id="save">
+                      <img src="/images/action/addCustBill${bundle.lang}.png" />
+                    </linkCommand>
+                    <span id="loadingImg" style="display:none;">
+                      ${bundle.wait}
+                      <br />
+                      <img alt="" src="/images/loading.gif" />
+                    </span>
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div rendered="${this.success }" class="success">
+                ${bundle.bill_saved }
+              </div>
+              <label rendered="${this.error }"></label>
+            </td>
+          </tr>
+        </table>
+      </center>
+    </form>
+  </contentHolder>
+</page>

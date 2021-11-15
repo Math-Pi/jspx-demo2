@@ -1,0 +1,76 @@
+<page master="/master/site.master" encode="windows-1256" 
+controller="org.bay.jspx.demo2.web.controller.admin.ViewUser">
+	<contentHolder id="navholder">
+		<a href="/pages/admin/index.jspx" >
+	 ${bundle.nav_admin}
+		</a>
+		:
+	 ${bundle.view_user_details } 	
+		
+	 </contentHolder>
+	<contentHolder id="mainholder">
+	<form   style="width: 80%">
+	
+		<center>
+			<table>
+				<tr>
+					<td>
+			<fieldset>
+				<legend>${bundle.user_details } </legend>
+				<table cellpadding="5px" cellspacing="5px" id="formTable" width="100%">
+					<tr rendered="${this.isDeleted }" class="error">
+						<td colspan="4">
+							${bundle.this_deleted_user}
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_username}
+						</td>
+						<td align="right">
+            					${user.name}
+						</td>
+						<td align="right" class="jspx-demoLabel">
+						${bundle.add_date }
+						</td>
+						<td align="right">
+								${user.creationDate }
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+						${bundle.form_usertype}
+						</td>
+						<td align="right">
+								${user.groupsNameString }
+						</td>
+					</tr>
+					<tr>
+						<td  align="center">
+						</td>
+						<td align="center" >
+							<linkCommand   onserverclick="deleteUser" confirmation="${bundle.r_u_sure_del_user }"
+							 
+							rendered="${this.isActive}">
+								<img src="/images/action/delUser${bundle.lang}.png" />
+							</linkcommand>
+						</td>
+						<td align="center" >
+						</td>
+						<td align="center" >
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4" >
+						</td>
+					</tr>
+				</table>
+				
+			</fieldset>
+					</td>
+				</tr>
+			</table>
+		</center>
+		</form>
+	</contentHolder>
+</page>

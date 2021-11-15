@@ -1,0 +1,87 @@
+<page master="/master/site.master" encode="windows-1256" controller="org.bay.jspx.demo2.web.controller.admin.AddUser"
+  >
+	<contentHolder id="navholder">
+		<a href="/pages/amin/index.jspx" >
+	 ${bundle.nav_admin}
+		</a>
+		:
+		<a href="/pages/admin/addUser.jspx" >
+	 ${bundle.a_add_user}	
+		</a>
+	</contentHolder>
+	<contentHolder id="mainholder">
+	
+	<form  method="post"  onsubmit="sw('save')" style="width: 80%">
+		<center>
+				<table  cellpadding="5px" cellspacing="5px" id="formTable">
+				<tr>
+					<td align="right" class="jspx-demoLabel">
+						${bundle.form_username}
+					</td>
+					<td align="right">
+						<span >
+           					<input type="text" maxLength="150" id="userName" value="${user.name }"/>
+      						</span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="jspx-demoLabel">${bundle.form_password} </label>
+					</td>
+					<td>
+						<input type="password" id="newPass" value="${user.password }" />
+						<validator type="required" indicator="${bundle.required}"  control_to_validate="newPass" message="${bundle.required}" group="v"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="jspx-demoLabel">${bundle.form_password2} </label>
+					</td>
+					<td>
+						<input type="password" id="password2" />
+						<validator type="required" indicator="${bundle.required}"  control_to_validate="password2" message="${bundle.required}" group="v"/>
+					</td>
+				</tr>
+				<tr>
+                  <td align="right" class="jspx-demoLabel">
+                    ${bundle.form_usertype}
+                  </td>
+                  <td align="right">
+                    <select id="groupId"  value="${user.groupsString}" >
+                      <datalookup  datasource="${sql.data_source}" sql="${sql.get_group}" key="${sql.id_key}" value="${sql.name_key}" />
+                    </select>
+                  </td>
+				</tr>
+				<tr>
+					<td align="center" colspan="2">
+						<Captcha group="v" type="alphanumeric" message="${bundle.captcha }" length="6"/>
+					</td>
+				</tr>
+				<tr>
+					<td height="10" align="center" colspan="2">
+						<br />
+						<linkCommand onserverclick="save" id="save" group="v">
+							<img src="/images/action/addCustButton${bundle.lang}.png" border="0"/>
+						</linkCommand>
+						<span id="loadingImg" style="display:none;">
+						     	${bundle.wait}
+					    	<br />
+					    	<img alt="" src="/images/loading.gif" />
+					   	</span>
+						<br />
+					</td>
+				</tr>
+
+				<tr>
+					<td colspan="2">
+						<span rendered="${this.success }" class="success">${bundle.user_save_ok}
+						</span>
+						<label rendered="${this.error }"></label>
+					</td>
+				</tr>
+			</table>
+			
+		</center>
+	</form>
+	</contentHolder>
+</page>

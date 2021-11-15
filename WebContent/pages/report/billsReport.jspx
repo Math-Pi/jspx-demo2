@@ -1,0 +1,73 @@
+<page master="/master/report.master" encode="windows-1256"
+controller="org.bay.jspx.demo2.web.controller.report.ReportController">
+
+  <contentHolder id="mainholder">
+
+    <table width="1024px" id="rTable">
+      <tr>
+        <td align="center">
+          <h1>
+            ﬂ‘› ›Ê« Ì— «·„”«Â„Ì‰
+          </h1>
+          <br />
+          <hr />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <datatable casesensitive="true" width="100%"  id="reportTable" datasource="${sql.data_source}" pagesize="999999"
+                  table="" sql="${sql.searchBills}"
+                  bindtoclass="org.bay.jspx.demo2.engine.model.Customer"
+                  class="jspxReportTable" headerclass="jspxReportTableHeader" new="false"
+                  rowclass="jspxReportTableEvenRow" selectedrowclass="jspxReportTableSelectedRow"
+                  tdclass="jspxReportTd" dateformat="dd/MM/yyyy HH:mm" showrowindex="false"
+                  startrowindex="1" tdclass="jspxReportTd" noresults="${bundle.noCustomerBills}"
+                  noresultsclass="ie" rendered="true" var="bill">
+
+
+
+            <datacolumn text="«·„»·€" fieldname="AMOUNT_DEPIT" type="NUMBER"  sortable="true" />
+            <datacolumn text="${bundle.f_ref}" fieldname="COMMENT"	type="string" sortable="true" />
+            <datacolumn text="${bundle.form_ref}" fieldname="R_NAME"	type="string" sortable="true" />
+
+            <datacolumn text=" ${bundle.bill_id}" fieldname="serial_num"	type="string" sortable="true" >
+              <itemtemplate>
+                <a href="/pages/accounts/viewBill.jspx?id=${bill.id}" style="text-decoration: underline;" >${bill.serial_num}</a>
+              </itemtemplate>
+            </datacolumn>
+            <datacolumn text="${bundle.form_bill_date}" fieldname="issue_date"	type="date" sortable="true" dateformat="dd/MM/yyyy"/>
+
+            <datacolumn text="${bundle.form_cust_name}" fieldname="c_name"	type="string" sortable="true" >
+              <itemtemplate>
+                <a href="/pages/customers/viewCustomer.jspx?id=${bill.customer_id}" style="text-decoration: underline;" >${bill.c_name}</a>
+              </itemtemplate>
+            </datacolumn>
+            <datacolumn text="„œŒ· «·›« Ê—…" fieldname="u_id"	 sortable="true" >
+              <itemtemplate>
+                <a href="/pages/admin/viewUser.jspx?id=${bill.U_ID}" style="text-decoration: underline;" >${bill.U_NAME}</a>
+              </itemtemplate>
+            </datacolumn>
+            <datacolumn text="${bundle.f_bill_date}" fieldname="creation_date"	type="date" sortable="true" dateformat="dd/MM/yyyy hh:mm a"/>
+            <datacolumn text=" ${bundle.bill_deleted}" fieldname="BDB_NAME"	type="string" sortable="true" />
+
+
+            <exporttoexcel  rowstoexport="all" command="${bundle.form_excel}"  filename="AllCustomersReport.xls"/>
+            <footer class="jspxReportTableFooter" message="${bundle.footer}" firstcommandtext="${bundle.first}"
+              lastcommandtext="${bundle.last}" prevcommandtext="${bundle.prev}"
+              nextcommandtext="${bundle.next}" rendered="false"/>
+          </datatable>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="4"  align="right">
+          <label class="jspx-demoRLabel" >${bundle.form_trade_vol}</label>
+          &nbsp;
+          &nbsp;
+          <span style="font-size: 20pt;">
+          ${this.totalAmount }
+          </span>
+        </td>
+      </tr>
+    </table>
+  </contentHolder>
+</page>

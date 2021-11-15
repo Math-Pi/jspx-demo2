@@ -1,0 +1,125 @@
+<page master="/master/site.master" encode="windows-1256"  deniedRoles="Data Entry"
+controller="org.bay.jspx.demo2.web.controller.account.ViewBill">
+  <contentHolder id="navholder">
+    <a href="/pages/customers/index.jspx" >
+      dir="${bundle.account}"
+    </a>
+    :
+     »Ì«‰«  «·›« Ê—…
+
+  </contentHolder>
+  <contentHolder id="mainholder">
+    <form  method="post" enctype="multipart/form-data"   onsubmit="sw('save')" style="width: 80%">
+
+      <center>
+        <table>
+          <tr>
+            <td>
+              <table cellpadding="5px" cellspacing="5px" id="formTable">
+              	<tr>
+              		<td colspan="4" align="center" rendered="${this.isDeleted }">
+              			<label class="error"> ${bundle.bill_deleted} </label>
+              		</td>
+              	</tr>
+                <tr >
+                  <td colspan="4">
+                    <fieldset>
+                      <legend>${bundle.form_cust_details}</legend>
+                      <table cellpadding="4px" cellspacing="4px">
+		                <tr>
+		                  <td align="left" class="jspx-demoLabel">
+		                    ${bundle.form_cust_id}
+		                  </td>
+		                  <td align="right">
+		                      ${cust.id }
+		                  </td>
+		                  <td align="left" class="jspx-demoLabel" colspan="2">
+		                  	<a href="/pages/customers/viewCustomer.jspx?id=${cust.id }" target="_blank" >
+		                    ${bundle.form_full_cust_details}
+		                  	</a>
+		                  </td>
+		                </tr>
+                        <tr>
+                          <td align="left" class="jspx-demoLabel">
+                            ${bundle.form_cust_name}
+                          </td>
+                          <td align="right">
+                            <span >
+                              ${cust.name}
+                            </span>
+                          </td>
+                          <td align="left" class="jspx-demoLabel">
+                            ${bundle.form_cust_acc_id}
+                          </td>
+                          <td align="right" dir="ltr">
+                            <span >
+                              <label  style=" font-weight: bold;  " >
+                                ${cust.accountNum1 }
+                              </label>
+                              -
+                              <label  style=" font-weight: bold;  " >
+                                ${cust.accountNum2 }
+                              </label>
+                              -
+                              <label id="accountNum1" style=" font-weight: bold;  " >
+                                ${cust.accountNum3 }
+                              </label>
+                            </span>
+                          </td>
+                        </tr>
+                      </table>
+                    </fieldset>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="left" class="jspx-demoLabel">
+                    ${bundle.bill_id}
+                  </td>
+                  <td align="right">
+                     ${bill.serialNum} 
+                  </td>
+                  <td align="left" class="jspx-demoLabel">
+                    ${bundle.f_bill_amount}
+                  </td>
+                  <td align="right"> 
+                  	${bill.amountDepit}
+                  </td>
+                </tr>
+                <tr>
+                  <td align="left" class="jspx-demoLabel">
+                    ${bundle.form_ref}
+                  </td>
+                  <td align="right">
+						${bill.refrence.name}
+                  </td>
+                  <td align="left" class="jspx-demoLabel">
+                    ${bundle.form_bill_date}
+                  </td>
+                  <td align="right">
+					${bill.issueDate}
+                  </td>
+                </tr>
+                <tr>
+                  <td align="left" class="jspx-demoLabel">
+                    ${bundle.f_bill_date}
+                  </td>
+                  <td align="right">
+					${bill.creationDate}
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+          <tr>
+            <td>
+            	<linkCommand  onserverclick="deleteBill" confirmation="${bundle.r_u_sure_del_bill }" rendered="${this.isActive}">
+								<img src="/images/action/delBill${bundle.lang}.png" />
+				</linkcommand>
+            </td>
+          </tr>
+        </table>
+      </center>
+    </form>
+  </contentHolder>
+</page>

@@ -1,0 +1,235 @@
+<page master="/master/site.master" encode="windows-1256"  deniedRoles="Auditor,Accountant"
+controller="org.bay.jspx.demo2.web.controller.customer.AddNewCustomer">
+	<contentHolder id="navholder">
+		<a href="/pages/customers/index.jspx" >
+	 ${bundle.nav_cust }
+		</a>
+		:
+		<a href="/pages/customers/addCustomer.jspx" >
+	 		${this.navTitle }
+		</a>
+		
+	 </contentHolder>
+	<contentHolder id="mainholder">
+	<form  method="post" enctype="multipart/form-data"   onsubmit="sw('save')" style="width: 80%">
+	
+		<center>
+			<table>
+				<tr>
+					<td>
+			<fieldset>
+				<legend>${bundle.form_cust_details}</legend>
+				<table cellpadding="5px" cellspacing="5px" id="formTable">
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_id}
+						</td>
+						<td align="right">
+							<span rendered="${this.isEditUser }">
+							${cust.id }
+							</span>
+							<span rendered="${this.isNewUser }">
+            					<input type="text" maxLength="4" id="custId" value="${cust.id }" size="4" width="50px"
+            					 onkeyup="updateAccount(this.value)"/>
+            					 <validator type="required" indicator="${bundle.required}"  control_to_validate="custId" message="${bundle.required}" group="x" included="${this.isNewUser }"/>
+            					 <validator type="numeric" control_to_validate="custId" message="${bundle.numeric}" group="x" />
+       						</span>
+						</td>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_acc_id}
+						</td>
+						<td align="right" dir="ltr">
+							<span >
+            					
+            					<label id="accountNum1" style=" font-weight: bold;  " >
+            					${cust.accountNum3 } 
+            					</label>
+       						</span>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_name}
+						</td>
+						<td align="right">
+            					<input type="text" maxLength="150" id="custName" value="${cust.name}"/>
+            					 <validator type="required" indicator="${bundle.required}"  control_to_validate="custName" message="${bundle.required}" group="x" />
+						</td>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_passport}
+						</td>
+						<td align="right">
+            					<input type="text" maxLength="25" id="passport" value="${cust.passportNum}"/>
+            					 <validator type="required" indicator="${bundle.required}"  control_to_validate="passport" message="${bundle.required}" group="x" included="${this.isNewUser }"/>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_state}
+						</td>
+						<td align="right">
+								<select id="emirate"  value="${cust.address.emirate.id}"  >
+			                	<datalookup  datasource="${sql.data_source}" sql="${sql.get_emirate}" key="${sql.id_key}" value="${sql.name_key}" />
+            					</select>
+						</td>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_reg}
+						</td>
+						<td align="right">
+            					<input type="text" maxLength="25" id="reg" value="${cust.regNum}"/>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_phone}
+						</td>
+						<td align="right">
+							<span >
+            					<input type="text" maxLength="10" id="phone"  value="${cust.phone}"/>
+            					<validator type="numeric" control_to_validate="phone" message="${bundle.numeric}" group="x" />
+								<label rendered="false" id="mobileLen" style="color: red">${bundle.phone_len_error }</label>
+       						</span>
+						</td>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_phone2}
+						</td>
+						<td align="right">
+							<span >
+            					<input type="text" maxLength="10" id="phone2"  value="${cust.phone2}"/>
+            					 <validator type="numeric" control_to_validate="phone2" message="${bundle.numeric}" group="x" />
+       						</span>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+						${bundle.form_cust_address}
+						</td>
+						<td align="right">
+							<span >
+            					<input type="text" maxLength="35" id="address" value="${cust.address.location}"/>
+       						</span>
+						</td>
+						<td align="right" class="jspx-demoLabel">
+						${bundle.form_cust_home}
+						</td>
+						<td align="right">
+							<span >
+            					<input type="text" maxLength="35" id="home" value="${cust.address.home}"/>
+       						</span>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+						${bundle.form_cust_pb}
+						</td>
+						<td align="right">
+							<span >
+            					<input type="text" maxLength="35" id="postOffice" value="${cust.address.postOfficeNumber}"/>
+       						</span>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+						${bundle.form_cust_bod}
+						</td>
+						<td align="right">
+								<calendar  value="${cust.birthDate}" dateformat="dd/MM/yyyy" />
+			                	
+						</td>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_marital}
+						</td>
+						<td align="right">
+								<select id="emirate"  value="${cust.martialStatus.id}"  >
+			                	<datalookup  datasource="${sql.data_source}" sql="${sql.get_martial}" key="${sql.id_key}" value="${sql.name_key}" />
+            					</select>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_grade}
+						</td>
+						<td align="right">
+								<select id="GRADE"  value="${cust.grade.id}"  >
+			                	<datalookup  datasource="${sql.data_source}" sql="${sql.get_grade}" key="${sql.id_key}" value="${sql.name_key}" />
+            					</select>
+						</td>
+						<td align="right" class="jspx-demoLabel">
+						${bundle.form_cust_job}
+						</td>
+						<td align="right">
+            					<input type="text" maxLength="60"  value="${cust.job}"/>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_stock}  
+						</td>
+						<td align="right" dir="${bundle.dir}">
+            					<input type="text" maxLength="10"  value="${cust.stockShare}" id="stock"/>
+            					<validator type="numeric" control_to_validate="stock" message="${bundle.numeric}" group="x" />
+						</td>
+						<td align="right" class="jspx-demoLabel">
+						${bundle.form_member_date}
+						</td>
+						<td align="right">
+								<calendar  value="${cust.creationDate}" dateformat="dd/MM/yyyy" />
+			                	
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_gender} 
+						</td>
+						<td align="right" colspan="3" dir="${bundle.dir}">
+							<radiogroup id="gender" value="${cust.gender }">
+								<input type="radio" value="1" text="${bundle.male }" style="width: 20px"/>
+								<input type="radio" value="2" text="${bundle.female }" style="width: 20px"/>
+							</radiogroup>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_cust_photo}
+						</td>
+						<td align="right" >
+							<input type="file" id="customerImg" size="4"  group="x" style="width: 150px"/>
+						</td>
+						<td align="right" class="jspx-demoLabel">
+							${bundle.form_passport_photo}
+						</td>
+						<td align="right" colspan="3">
+							<input type="file" id="passportImg" size="4"  group="x" style="width: 150px"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4" align="right">
+							<linkCommand  onServerClick="saveCustomer"  group="x" id="save">
+								<img src="/images/action/addCustButton${bundle.lang}.png" />
+							</linkCommand>
+							<span id="loadingImg" style="display:none;">
+								${bundle.wait}
+					    	<br />
+					    	<img alt="" src="/images/loading.gif" />
+					   	</span>
+						</td>
+					</tr>
+				</table>
+				
+			</fieldset>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span rendered="${this.success }" class="success">
+						${bundle.save_cust_success }
+						 <a href="/pages/customers/viewCustomer.jspx?id=${cust.id }">${cust.id }</a>
+						</span>
+						<label rendered="${this.error }" class="error" >${bundle.CUSTOMER_ALREADY_DEFINED }</label>
+					</td>
+				</tr>
+			</table>
+		</center>
+		</form>
+	</contentHolder>
+</page>

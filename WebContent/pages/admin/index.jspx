@@ -1,0 +1,36 @@
+<page master="/master/site.master" encode="windows-1256" >
+	<contentHolder id="navholder"> „—Õ»« »ﬂ</contentHolder>
+	<contentHolder id="mainholder">
+		<center>
+			<table width="100%">
+				<tr>
+					<td align="center" width="50%">
+						<a href="/pages/admin/changePassword.jspx">
+							<img alt="" src="/images/prev/changePassword.png"/>
+							<br/>
+							${bundle.a_chpswd}
+						</a>
+					</td>
+					<td align="center" width="50%">
+						<a href="/pages/admin/searchUsers.jspx">
+							<img alt="" src="/images/prev/searchUser.png"/>
+							<br/>
+							${bundle.a_search_user}
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td align="center" width="50%">
+						<a href="/pages/admin/addUser.jspx">
+							<img alt="" src="/images/prev/addUser.png"/>
+							<br/>
+							${bundle.a_add_user}
+						</a>
+					</td>
+					<td align="center" width="50%">
+					</td>
+				</tr>
+			</table>
+		</center>
+	</contentHolder>
+</page>
